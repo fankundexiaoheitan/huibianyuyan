@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\class3.obj" 
+TO ".\Objects\开关控制" 
+PRINT(".\Listings\开关控制.m51") RAMSIZE(256) 

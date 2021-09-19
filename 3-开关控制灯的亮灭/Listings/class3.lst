@@ -1,0 +1,57 @@
+A51 MACRO ASSEMBLER  CLASS3                                                               09/19/2021 11:24:16 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\class3.obj
+ASSEMBLER INVOKED BY: C:\xuexigongju\keil\C51\BIN\A51.EXE class3.ASM SET(SMALL) DEBUG PRINT(.\Listings\class3.lst) OBJEC
+                      T(.\Objects\class3.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;2021/9/19
+                       2     ;×÷Õß£»Ð¡ºÚÌ¿
+                       3     ;³ÌÐòÏÖÏó£º
+                       4     ;ÀûÓÃ¿ª¹Ø¿ØÖÆµÆµÄÁÁÃð
+0000                   5     ORG 0000H
+0000                   6     START:
+0000 75A0FF            7               MOV P2,#0FFH
+0003 75B0FF            8               MOV P3,#0FFH
+0006                   9     KEY:    ;°´¼ü¿ØÖÆ³ÌÐò
+0006 30B1FD           10               JNB P3.1,$
+0009 1112             11               ACALL DELAY   ;ÑÓÊ±Ïû¶¶
+000B 20B1FD           12               JB P3.1,$
+000E B2A0             13               CPL P2.0
+0010 0106             14               AJMP KEY
+0012                  15     DELAY:  ;ÑÓÊ±º¯Ê
+0012 7805             16               MOV R0,#5     ;ÑÓÊ±´ó¸Å5ms
+0014 7902             17     D0:       MOV R1,#2
+0016 7AFA             18     D1:       MOV R2,#250
+0018 DAFE             19     D2:   DJNZ R2,D2
+001A D9FA             20               DJNZ R1,D1
+001C D8F6             21               DJNZ R0,D0
+001E 22               22               RET
+                      23     END
+                             
+                             
+A51 MACRO ASSEMBLER  CLASS3                                                               09/19/2021 11:24:16 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D0 . . . . . . . .  C ADDR   0014H   A   
+D1 . . . . . . . .  C ADDR   0016H   A   
+D2 . . . . . . . .  C ADDR   0018H   A   
+DELAY. . . . . . .  C ADDR   0012H   A   
+KEY. . . . . . . .  C ADDR   0006H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+START. . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

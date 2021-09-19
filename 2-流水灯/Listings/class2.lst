@@ -1,0 +1,52 @@
+A51 MACRO ASSEMBLER  CLASS2                                                               09/19/2021 11:03:48 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\class2.obj
+ASSEMBLER INVOKED BY: C:\xuexigongju\keil\C51\BIN\A51.EXE class2.ASM SET(SMALL) DEBUG PRINT(.\Listings\class2.lst) OBJEC
+                      T(.\Objects\class2.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;2020/9/19
+                       2     ;×÷Õß£ºÐ¡ºÚÌ¿
+                       3     ;±¾³ÌÐòÏÖÏó£º
+                       4     ;¿ª·¢°åÉÏµÄ8¸öµÆÒÀ´Î´Ó×óÏòÓÒÁÁÐÎ³ÉÁ÷Ë®µÆ
+0000                   5     ORG 0000H
+0000 74FE              6     MOV A,#0FEH
+0002                   7     START:  ;ÆðÊ¼Ö÷³ÌÐòÑ­»·
+0002 F5A0              8               MOV P2,A
+0004 1109              9               ACALL DELAY
+0006 23               10               RL A
+0007 0102             11               AJMP START
+0009                  12     DELAY:  ;ÑÓÊ±º¯Ê
+0009 780A             13               MOV R0,#10 ;ÑÓÊ±Ê±¼ä10*100ms
+000B 79C8             14     D0:       MOV R1,#200
+000D 7AFA             15     D1:       MOV R2,#250
+000F DAFE             16     D3:       DJNZ R2,D3
+0011 D9FA             17               DJNZ R1,D1
+0013 D8F6             18               DJNZ R0,D0
+0015 22               19               RET
+                      20     END
+                             
+                             
+A51 MACRO ASSEMBLER  CLASS2                                                               09/19/2021 11:03:48 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D0 . . . . . . . .  C ADDR   000BH   A   
+D1 . . . . . . . .  C ADDR   000DH   A   
+D3 . . . . . . . .  C ADDR   000FH   A   
+DELAY. . . . . . .  C ADDR   0009H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0002H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

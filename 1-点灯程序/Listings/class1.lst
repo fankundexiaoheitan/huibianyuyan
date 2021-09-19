@@ -1,0 +1,52 @@
+A51 MACRO ASSEMBLER  CLASS1                                                               09/19/2021 11:06:43 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\class1.obj
+ASSEMBLER INVOKED BY: C:\xuexigongju\keil\C51\BIN\A51.EXE class1.ASM SET(SMALL) DEBUG PRINT(.\Listings\class1.lst) OBJEC
+                      T(.\Objects\class1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;2021/9/19
+                       2     ;作者:小黑炭
+                       3     ;本程序现象
+                       4     ;前四个灯亮1秒左右灭掉后4个灯亮然后灭掉循环往复
+                       5     ;程序如下:
+0000                   6     ORG 0000H
+0000                   7     START:  ;主循环程序
+0000 75A0F0            8               MOV P2,#0F0H
+0003 110C              9               ACALL DELAY   ;延时大概1s
+0005 75A00F           10               MOV P2,#0FH
+0008 110C             11               ACALL DELAY   ;延时大概1s
+000A 0100             12               AJMP START
+000C                  13     DELAY:   ;延时程序  晶振为12M
+000C 780A             14               MOV R0,#10    ;延时约为10*100ms
+000E 79C8             15     D0:   MOV R1,#200
+0010 7AFA             16     D1:       MOV R2,#250
+0012 DAFE             17     D3:   DJNZ R2,D3
+0014 D9FA             18           DJNZ R1,D1
+0016 D8F6             19               DJNZ R0,D0
+0018 22               20               RET
+                      21     END
+                             
+A51 MACRO ASSEMBLER  CLASS1                                                               09/19/2021 11:06:43 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D0 . . . . . . . .  C ADDR   000EH   A   
+D1 . . . . . . . .  C ADDR   0010H   A   
+D3 . . . . . . . .  C ADDR   0012H   A   
+DELAY. . . . . . .  C ADDR   000CH   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
