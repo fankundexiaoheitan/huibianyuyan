@@ -1,0 +1,81 @@
+A51 MACRO ASSEMBLER  CLASS5                                                               09/19/2021 18:10:28 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\class5.obj
+ASSEMBLER INVOKED BY: C:\xuexigongju\keil\C51\BIN\A51.EXE class5.ASM SET(SMALL) DEBUG PRINT(.\Listings\class5.lst) OBJEC
+                      T(.\Objects\class5.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;2021/9/19
+                       2     ;вВуъё╨п║╨зл©
+                       3     ;ЁлпРожоСё╨
+                       4     ;╢ссрмЫвС8╦Ж╣фц©╦Т1sвСсраар╩╦Жж╠╣╫х╚╡©аафП
+                       5     ;х╩╨С╢свСмЫсрц©╦Т1sвСсрцПр╩╦Жж╙╣юх╚цПя╜╩╥мЫ╦╢
+0000                   6     ORG 0000H
+0000 0102              7     AJMP MAIN
+0002                   8     MAIN:
+0002 78FF              9               MOV   R0,#0FFH        ;(R0)<-0FFH╪╢-1
+0004 7A10             10               MOV   R2,#16  ;вэ╧╡сп16╦Жй╬щ
+0006 900022           11               MOV   DPTR,#TAB
+0009                  12     LOOP:
+0009 08               13               INC   R0
+000A E8               14               MOV   A,R0
+000B 93               15               MOVC  A,@A+DPTR
+000C                  16     SHOW:
+000C F5A0             17               MOV   P2,A
+000E 120015           18               LCALL DELAY
+0011 DAF6             19               DJNZ  R2,LOOP
+0013 0102             20               AJMP  MAIN
+0015                  21     DELAY:  ;ясй╠всЁлпР
+0015 7B0A             22               MOV   R3,#10  ;ясй╠т╪н╙10*100ms
+0017 7EC8             23     D0:       MOV   R6,#200
+0019 7FFA             24     D1:       MOV   R7,#250
+001B DFFE             25               DJNZ  R7,$
+001D DEFA             26               DJNZ  R6,D1
+001F DBF6             27               DJNZ  R3,D0
+0021 22               28               RET
+0022                  29     TAB:    ;╡И╠М╥╫й╫
+0022 FEFC             30             DB      0FEH,0FCH
+                      31             ;DB     0FCH
+0024 F8               32             DB      0F8H
+0025 F0               33             DB      0F0H
+0026 E0               34             DB      0E0H
+0027 C0               35             DB      0C0H
+0028 80               36             DB      80H
+0029 00               37             DB      00H
+002A 80               38             DB      80H
+002B C0               39             DB      0C0H
+002C E0               40             DB      0E0H
+002D F0               41             DB      0F0H
+002E F8               42             DB      0F8H
+002F FC               43             DB      0FCH
+0030 FE               44             DB      0FEH
+0031 FF               45             DB      0FFH
+                      46     END
+                             
+                             
+                             
+A51 MACRO ASSEMBLER  CLASS5                                                               09/19/2021 18:10:28 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D0 . . . . . . . .  C ADDR   0017H   A   
+D1 . . . . . . . .  C ADDR   0019H   A   
+DELAY. . . . . . .  C ADDR   0015H   A   
+LOOP . . . . . . .  C ADDR   0009H   A   
+MAIN . . . . . . .  C ADDR   0002H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+SHOW . . . . . . .  C ADDR   000CH   A   
+TAB. . . . . . . .  C ADDR   0022H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

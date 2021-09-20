@@ -1,0 +1,66 @@
+A51 MACRO ASSEMBLER  CLASS4                                                               09/19/2021 16:23:11 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\class4.obj
+ASSEMBLER INVOKED BY: C:\xuexigongju\keil\C51\BIN\A51.EXE class4.ASM SET(SMALL) DEBUG PRINT(.\Listings\class4.lst) OBJEC
+                      T(.\Objects\class4.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;2021/9/19
+                       2     ;作者：小黑炭
+                       3     ;程序现象
+                       4     ;刚开始P2.0/P2.1/P2.2/P2.3四个灯全亮
+                       5     ;当按下P3.0/P3.1/P3.2/P3.3按键时对应的灭掉
+                       6     ;松开按键时对应的灯又亮起来
+0000                   7     ORG 0000H
+0000                   8     START:
+0000 D2B0              9               SETB P3.0
+0002 D2B1             10               SETB P3.1
+0004 D2B2             11               SETB P3.2
+0006 D2B3             12               SETB P3.3
+0008 20B004           13               JB   P3.0,LIG0
+000B D2A0             14               SETB P2.0
+000D 8002             15               SJMP next1
+000F C2A0             16     LIG0: CLR P2.0
+0011 20B104           17     next1: JB P3.1,LIG1
+0014 D2A1             18                SETB P2.1
+0016 8002             19                SJMP next2
+0018 C2A1             20     LIG1: CLR P2.1
+001A 20B204           21     next2: JB P3.2,LIG2
+001D D2A2             22                SETB P2.2
+001F 8002             23                SJMP next3
+0021 C2A2             24     LIG2: CLR P2.2
+0023 20B304           25     next3: JB P3.3,LIG3
+0026 D2A3             26                SETB P2.3
+0028 80D6             27                SJMP START
+002A C2A3             28     LIG3: CLR P2.3
+002C 80D2             29               SJMP START
+                      30     END
+                             
+                             
+A51 MACRO ASSEMBLER  CLASS4                                                               09/19/2021 16:23:11 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+LIG0 . . . . . . .  C ADDR   000FH   A   
+LIG1 . . . . . . .  C ADDR   0018H   A   
+LIG2 . . . . . . .  C ADDR   0021H   A   
+LIG3 . . . . . . .  C ADDR   002AH   A   
+NEXT1. . . . . . .  C ADDR   0011H   A   
+NEXT2. . . . . . .  C ADDR   001AH   A   
+NEXT3. . . . . . .  C ADDR   0023H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+START. . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
