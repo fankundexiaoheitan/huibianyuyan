@@ -1,0 +1,143 @@
+A51 MACRO ASSEMBLER  CLASS7                                                               09/21/2021 10:29:09 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\class7.obj
+ASSEMBLER INVOKED BY: C:\xuexigongju\keil\C51\BIN\A51.EXE class7.ASM SET(SMALL) DEBUG PRINT(.\Listings\class7.lst) OBJEC
+                      T(.\Objects\class7.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;2021/9/20
+                       2     ;作者：小黑炭
+                       3     ;程序现象：
+0000                   4     ORG     0000H
+  00A0                 5     LED     EQU P2                  ;设LED的医盼狿2脚
+0000 0115              6     AJMP    START           ;跳转到开始的程序
+0003                   7     ORG     0003H                           ;外部中断0起始地址
+0003 0147              8     AJMP    EX_INT_0                ;跳转到外部中断0
+0013                   9     ORG     0013H                           ;外部中断1起始地址
+0013 014D             10     AJMP    EX_INT_1                ;跳转到外部中断1
+                      11     ;*****************主初始化程序***********
+0015                  12     START:  ;开始主程序
+                      13                     ;初始化
+0015 75A885           14                     MOV     IE,#85H ;打开外部中断0和外部中断1
+0018 758805           15                     MOV     Tcon,#05H       ;设置外部中断0和外部中断1的触发方式为负缘触发方式（
+                             下降沿触发方式）
+001B 7800             16                     MOV     R0,#00H ;设置流水灯为模式0
+001D 112E             17                     ACALL CHANGE_LED_MODEL ;设置流水灯的模式
+                      18     ;************************************
+                      19     
+                      20     ;************主循环程序**************
+001F 7DFF             21     NEED0:  MOV     R5,#0FFH        ;给R5赋值为-1
+                      22     ;主循环
+0021 E4               23     LOOP:   CLR A   ;对累加器A进行清零
+0022 0D               24                     INC     R5      ;R5进行自加1
+0023 ED               25                     MOV A,R5;将R5中的手蹈持蹈奂悠鰽
+0024 93               26                     MOVC A,@A+DPTR
+0025 F5A0             27                     MOV LED,A
+0027 115C             28                     ACALL DELAY
+0029 BD03F5           29                     CJNE R5,#03H,LOOP
+002C 011F             30                     AJMP NEED0
+                      31     ;************************************
+                      32     
+                      33     ;**************选择当前流水灯的模式*********
+002E                  34     CHANGE_LED_MODEL:
+                      35     ;各个模式进行判断选择
+002E B80004           36     MODEL0: CJNE    R0,#00H,MODEL1
+0031 900063           37                     MOV             DPTR,#TAB0
+0034 22               38                     RET
+0035 B80104           39     MODEL1: CJNE    R0,#01H,MODEL2
+0038 900067           40                     MOV             DPTR,#TAB1
+003B 22               41                     RET
+003C B80204           42     MODEL2: CJNE    R0,#02H,MODEL3
+003F 90006B           43                     MOV             DPTR,#TAB2
+0042 22               44                     RET
+                      45     ;超出模式直接返回模式0
+0043                  46     MODEL3: 
+0043 7800             47                     MOV     R0,#00H
+0045 012E             48                     AJMP    CHANGE_LED_MODEL                
+                      49     ;*******************************************
+                      50     
+                      51     ;**********外部中断程序*************
+                      52     ;外部中断0子程序
+0047                  53     EX_INT_0:
+0047 08               54             INC     R0      ;对R0进行自加1
+0048 112E             55             ACALL   CHANGE_LED_MODEL        ;改变为选择后的模式
+004A 7DFF             56             MOV     R5,#0FFH        ;给R5赋值为-1
+A51 MACRO ASSEMBLER  CLASS7                                                               09/21/2021 10:29:09 PAGE     2
+
+004C 32               57             RETI
+004D                  58     EX_INT_1:
+004D 18               59             DEC     R0      ;对R0进行自减1
+004E 112E             60             ACALL   CHANGE_LED_MODEL        ;改变为选择后的模式
+0050 7DFF             61             MOV     R5,#0FFH        ;给R5赋值为-1
+0052 32               62             RETI
+                      63     ;************************************
+                      64     
+                      65     ;*************延时程序****************
+                      66     ;延时10ms子程序
+0053                  67     DELAY10MS:
+0053 7A14             68             MOV     R2,#20
+0055                  69     NEXT0:
+0055 7BFA             70             MOV     R3,#250
+0057 DBFE             71             DJNZ R3,$
+0059 DAFA             72             DJNZ R2,NEXT0
+005B 22               73             RET
+                      74     ;延时500ms子程序
+005C                  75     DELAY:
+005C 7C32             76             MOV     R4,#50  ;延时50*10ms
+005E                  77     NEXT1:
+005E 1153             78             ACALL DELAY10MS
+0060 DCFC             79             DJNZ R4,NEXT1
+0062 22               80             RET
+                      81     ;************************************
+                      82     
+                      83     ;*********流水灯模式的设置***********
+                      84     ;流水灯模式1
+0063 FCF3CF3F         85     TAB0:   DB      0FCH,0F3H,0CFH,3FH
+                      86     ;流水灯模式2
+0067 FC3FF3CF         87     TAB1:   DB      0FCH,3FH,0F3H,0CFH
+                      88     ;流水灯模式3
+006B 3CC355AA         89     TAB2:   DB      3CH,0C3H,55H,0AAH
+                      90     ;************************************
+                      91     END
+                                     
+                                     
+                             
+                             
+A51 MACRO ASSEMBLER  CLASS7                                                               09/21/2021 10:29:09 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CHANGE_LED_MODEL .  C ADDR   002EH   A   
+DELAY. . . . . . .  C ADDR   005CH   A   
+DELAY10MS. . . . .  C ADDR   0053H   A   
+EX_INT_0 . . . . .  C ADDR   0047H   A   
+EX_INT_1 . . . . .  C ADDR   004DH   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+LED. . . . . . . .  D ADDR   00A0H   A   
+LOOP . . . . . . .  C ADDR   0021H   A   
+MODEL0 . . . . . .  C ADDR   002EH   A   
+MODEL1 . . . . . .  C ADDR   0035H   A   
+MODEL2 . . . . . .  C ADDR   003CH   A   
+MODEL3 . . . . . .  C ADDR   0043H   A   
+NEED0. . . . . . .  C ADDR   001FH   A   
+NEXT0. . . . . . .  C ADDR   0055H   A   
+NEXT1. . . . . . .  C ADDR   005EH   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0015H   A   
+TAB0 . . . . . . .  C ADDR   0063H   A   
+TAB1 . . . . . . .  C ADDR   0067H   A   
+TAB2 . . . . . . .  C ADDR   006BH   A   
+TCON . . . . . . .  D ADDR   0088H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

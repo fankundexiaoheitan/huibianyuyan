@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\class7.obj" 
+TO ".\Objects\外部中断切换流水灯的模式" 
+PRINT(".\Listings\外部中断切换流水灯的模式.m51") RAMSIZE(256) 
