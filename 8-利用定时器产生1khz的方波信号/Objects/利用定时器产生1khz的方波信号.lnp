@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\class8.obj" 
+TO ".\Objects\利用定时器产生1khz的方波信号" 
+PRINT(".\Listings\利用定时器产生1khz的方波信号.m51") RAMSIZE(256) 

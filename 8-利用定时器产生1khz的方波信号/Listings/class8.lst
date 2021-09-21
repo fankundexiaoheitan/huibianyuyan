@@ -1,0 +1,55 @@
+A51 MACRO ASSEMBLER  CLASS8                                                               09/21/2021 14:58:52 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\class8.obj
+ASSEMBLER INVOKED BY: C:\xuexigongju\keil\C51\BIN\A51.EXE class8.ASM SET(SMALL) DEBUG PRINT(.\Listings\class8.lst) OBJEC
+                      T(.\Objects\class8.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;2021/9/21
+                       2     ;×÷Õß£ºÐ¡ºÚÌ¿
+                       3     ;³ÌÐòÏÖÏó£º
+0000                   4     ORG     0000H
+0000 011D              5     AJMP    MAIN
+001B                   6     ORG     001BH   ;T1µÄÖÐ¶ÏµØÖ·
+001B 012D              7     AJMP    TIM1_INT        ;¶¨Ê±Æ÷1µÄÖÐ¶Ï×Ó³ÌÐò
+                       8     
+001D                   9     MAIN:
+001D 758910           10                     MOV     TMOD,#10H       ;¶¨Ê±Æ÷1µÄ¹¤×÷·½Ê½1     16Î»¶¨Ê±Æ÷   12MHZ¾§Õñ
+0020 758DFE           11                     MOV     TH1,#0FEH
+0023 758B0C           12                     MOV TL1,#0CH
+0026 75A888           13                     MOV     IE,#88H ;´ò¿ª¶¨Ê±Æ÷1µÄÖÐ¶Ï
+0029 D28E             14                     SETB    TR1     ;¿ªÆô¶¨Ê±Æ÷1
+002B 012B             15                     AJMP    $       ;µÈ´¶¨Ê±Æ÷1µÄÏìÓ¦
+                      16     ;¶¨Ê±Æ÷1µÄÖÐ¶ÏÏìÓ¦³ÌÐò
+002D                  17     TIM1_INT:
+002D 758DFE           18                     MOV     TH1,#0FEH
+0030 758B0C           19                     MOV TL1,#0CH
+0033 B290             20                     CPL     P1.0    ;¶ÔP1.0Ò½Å½øÐÐÈ¡·´
+0035 32               21                     RETI
+                      22     
+                      23     END
+A51 MACRO ASSEMBLER  CLASS8                                                               09/21/2021 14:58:52 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+MAIN . . . . . . .  C ADDR   001DH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TIM1_INT . . . . .  C ADDR   002DH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
