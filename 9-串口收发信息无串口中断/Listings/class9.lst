@@ -1,0 +1,57 @@
+A51 MACRO ASSEMBLER  CLASS9                                                               09/22/2021 14:50:38 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\class9.obj
+ASSEMBLER INVOKED BY: C:\xuexigongju\keil\C51\BIN\A51.EXE class9.ASM SET(SMALL) DEBUG PRINT(.\Listings\class9.lst) OBJEC
+                      T(.\Objects\class9.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG     0000H
+0000 8000              2     JMP     MAIN
+                       3     
+                       4     
+0002                   5     MAIN:
+0002 758920            6             MOV     TMOD,#20H       ;∂® ±∆˜1π§◊˜∑Ω Ω2
+0005 758DFD            7             MOV     TH1,#0FDH       ;…Ë÷√≤®Ãÿ¬ Œ™9600
+0008 758BFD            8             MOV     TL1,#0FDH
+000B 759850            9             MOV     SCON,#50H       ; π”√¥Æø⁄∑Ω Ω1 πƒ‹Ω” ’
+000E 758700           10             MOV     PCON,#00H       ;≤®Ãÿ¬ ≤ªº”±∂
+0011 758840           11             MOV     Tcon,#40H       ;∆Ù∂Ø∂® ±∆˜1
+0014                  12     LOOP:
+0014 3098FD           13             JNB     RI,$    ;µ»¥Ω” ’µΩ–≈œ¢
+0017 E599             14             MOV     A,SBUF  ;Ω” ’µΩ–≈œ¢
+0019 F599             15             MOV     SBUF,A  ;∑¢ÀÕΩ” ’µΩµƒ–≈œ¢
+001B 3099FD           16             JNB     TI,$    ;µ»¥∑¢ÀÕ≥…π¶
+001E C299             17             CLR     TI              ;»Ìº˛«Â¡„∑¢ÀÕ±Í÷æŒª
+0020 C298             18             CLR     RI              ;»Ìº˛«Â¡„Ω” ’±Í÷æŒª
+0022 80F0             19             JMP     LOOP
+                      20     END
+                             
+                             
+A51 MACRO ASSEMBLER  CLASS9                                                               09/22/2021 14:50:38 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+LOOP . . . . . . .  C ADDR   0014H   A   
+MAIN . . . . . . .  C ADDR   0002H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+TCON . . . . . . .  D ADDR   0088H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
