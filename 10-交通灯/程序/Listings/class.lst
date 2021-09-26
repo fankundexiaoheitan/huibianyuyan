@@ -1,0 +1,94 @@
+A51 MACRO ASSEMBLER  CLASS                                                                09/26/2021 11:32:40 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\class.obj
+ASSEMBLER INVOKED BY: C:\xuexigongju\keil\C51\BIN\A51.EXE class.ASM SET(SMALL) DEBUG PRINT(.\Listings\class.lst) OBJECT(
+                      .\Objects\class.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;班级：B19222
+                       2     ;作者：赵雪坤
+                       3     ;名称：红绿灯
+                       4     ;所用晶振主频为12MHZ
+0000                   5     ORG 0000H
+                       6     
+                       7     ;**************初始化子程序************
+0000                   8     START:
+                       9                     ;所有灯初始全灭
+0000 4380FF           10                     ORL     P0,#0FFH
+0003 43A00F           11                     ORL     P2,#0FH
+                      12     ;**************************************
+                      13     
+                      14     ;************主循环子程序**************
+0006                  15     LOOP:
+                      16                     ;起始状态
+                      17                     ;南北方向亮绿灯，东西方向亮红灯，60S，其他灯全灭
+0006 75809E           18                     MOV             P0,#9EH
+0009 75A0F7           19                     MOV             P2,#0F7H
+000C 120046           20                     LCALL   DELAY_60S
+                      21                     ;东西方向红灯亮，南北方向绿灯灭时黄灯闪烁一次，一次1秒
+000F 75805D           22                     MOV             P0,#5DH
+0012 120038           23                     LCALL   DELAY_1S
+0015 438082           24                     ORL             P0,#82H
+0018 120038           25                     LCALL   DELAY_1S
+                      26                     ;然后南北红灯亮，同时东西方向绿灯亮60秒
+001B 7580F3           27                     MOV             P0,#0F3H
+001E 75A0FC           28                     MOV             P2,#0FCH
+0021 120046           29                     LCALL   DELAY_60S
+                      30                     ;南北方向红灯亮，东西方向绿灯灭时黄灯闪烁一次，一次1秒
+0024 7580EB           31                     MOV             P0,#0EBH
+0027 75A0FA           32                     MOV             P2,#0FAH
+002A 120038           33                     LCALL   DELAY_1S
+002D 438010           34                     ORL             P0,#10H
+0030 43A004           35                     ORL             P2,#04H
+0033 120038           36                     LCALL   DELAY_1S
+0036 80CE             37                     JMP LOOP
+                      38     ;**************************************
+                      39     
+                      40     ;*****************延时子程序***********
+0038                  41     DELAY_1S:       ;延时大约为1s子程序
+0038 780A             42                             MOV             R0,#10          ;10*100ms
+003A 79C8             43     D0:                     MOV             R1,#200
+003C 7AF8             44     D1:                     MOV             R2,#248
+003E 00               45                             NOP
+003F DAFE             46                             DJNZ    R2,$
+0041 D9F9             47                             DJNZ    R1,D1
+0043 D8F5             48                             DJNZ    R0,D0
+0045 22               49                             RET
+                      50     
+0046                  51     DELAY_60S:      ;延时大约为60s子程序
+0046 7B3C             52                             MOV             R3,#60  ;60*1S
+0048 120038           53     D2:                     LCALL   DELAY_1S
+004B DBFB             54                             DJNZ    R3,D2
+004D 22               55                             RET
+                      56     ;**************************************
+                      57     
+A51 MACRO ASSEMBLER  CLASS                                                                09/26/2021 11:32:40 PAGE     2
+
+                      58     END
+                             
+A51 MACRO ASSEMBLER  CLASS                                                                09/26/2021 11:32:40 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D0 . . . . . . . .  C ADDR   003AH   A   
+D1 . . . . . . . .  C ADDR   003CH   A   
+D2 . . . . . . . .  C ADDR   0048H   A   
+DELAY_1S . . . . .  C ADDR   0038H   A   
+DELAY_60S. . . . .  C ADDR   0046H   A   
+LOOP . . . . . . .  C ADDR   0006H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
