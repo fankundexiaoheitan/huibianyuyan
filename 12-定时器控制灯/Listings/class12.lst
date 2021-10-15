@@ -1,0 +1,64 @@
+A51 MACRO ASSEMBLER  CLASS12                                                              10/15/2021 18:15:51 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\class12.obj
+ASSEMBLER INVOKED BY: C:\xuexigongju\keil\C51\BIN\A51.EXE class12.asm SET(SMALL) DEBUG PRINT(.\Listings\class12.lst) OBJ
+                      ECT(.\Objects\class12.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;°à¼¶£ºB19222
+                       2     ;ÐÕÃû£ºÕÔÑ©À¤
+                       3     ;¹¦ÄÜ½éÉÜ£º
+                       4     ;ÀûÓÃµ¥Æ¬»úµÄ¶¨Ê±Æ÷ÊµÏÖLEDÁÁ50msµÄÊ±¼ä£¬È»ºóÏ¨Ãð¡£
+                       5     ;±¾´ÎÊ¹ÓÃ¾§ÕñÎª12M
+                       6     
+0000                   7     ORG     0000H
+0000 010D              8     AJMP    START
+000B                   9     ORG             000BH
+000B 011D             10     AJMP    TIME0_INT
+                      11     
+                      12     ;********³õÊ¼»¯³ÌÐò*********
+000D                  13     START:
+000D 758901           14             MOV             TMOD,#01H       ;Ê¹ÓÃ¶¨Ê±Æ÷0·½Ê½1       16Î»¶¨Ê±Æ÷
+0010 758C3C           15             MOV     TH0,#60         ;ÒòÎªÒª¼ÆÊ±50ms£¬ÇÒ¾§ÕñÎª12M£¬
+                      16                                                     ;ËùÒÔ¶¨Ê±Æ÷¸ß8Î»Îª(65536-50000)/256È¡ÕûÊ
+                      17                                             
+0013 758AB0           18             MOV             TL0,#176                ;ÒòÎªÒª¼ÆÊ±50ms£¬ÇÒ¾§ÕñÎª12M£¬
+                      19                                                     ;ËùÒÔ¶¨Ê±Æ÷µÍ8Î»Îª(65536-50000)%256È¡ÕûÊ
+0016 75A882           20             MOV             IE,#82H         ;´ò¿ª×ÜÖÐ¶ÏºÍ¶¨Ê±Æ÷0µÄÖÐ¶Ï
+0019 D28C             21             SETB    TR0                     ;´ò¿ª¶¨Ê±Æ÷0
+001B 80FE             22             SJMP    $                       ;µÈ´¶¨Ê±Æ÷0ÖÐ¶ÏÏìÓ¦
+                      23     ;***************************
+                      24     
+                      25     ;*********¶¨Ê±Æ÷0ÖÐ¶Ï*******
+001D                  26     TIME0_INT:
+001D 758C3C           27             MOV     TH0,#60         ;ÔÙ´Î×°ÔØÒ»´Î
+0020 758AB0           28             MOV             TL0,#176        
+0023 B290             29             CPL     P1.0    ;¶ÔLEDÒ½ÅP1.0½øÐÐÈ¡·´
+0025 32               30             RETI            ;ÖÐ¶Ï·µ»ØÖ¸Áî
+                      31     ;***************************
+                      32     END
+A51 MACRO ASSEMBLER  CLASS12                                                              10/15/2021 18:15:51 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+START. . . . . . .  C ADDR   000DH   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TIME0_INT. . . . .  C ADDR   001DH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
