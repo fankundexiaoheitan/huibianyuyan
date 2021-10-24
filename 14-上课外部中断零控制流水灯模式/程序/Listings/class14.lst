@@ -1,0 +1,101 @@
+A51 MACRO ASSEMBLER  CLASS14                                                              10/24/2021 22:25:34 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\class14.obj
+ASSEMBLER INVOKED BY: C:\xuexigongju\keil\C51\BIN\A51.EXE class14.asm SET(SMALL) DEBUG PRINT(.\Listings\class14.lst) OBJ
+                      ECT(.\Objects\class14.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG             0000H
+0000 0105              2     AJMP    START
+0003                   3     ORG             0003H   ;Íâ²¿ÖÐ¶Ï0µØÖ·Èë¿Ú
+0003 0125              4     AJMP    EXT_INT0
+                       5     
+  0000                 6     FLAG    BIT     00H     ;¶¨ÒåÒ»¸öÎ»±äÁ¿
+                       7     
+                       8     ;**********³õÊ¼»¯×Ó³ÌÐò************
+0005                   9     START:
+0005 7401             10                     MOV             A,#01H
+0007 C200             11                     CLR             FLAG    ;ÇåÁã
+0009 D288             12                     SETB    IT0     ;ÉèÖÃÍâ²¿ÖÐ¶Ï0Î»ÏÂ½µÑØ´¥·¢·½Ê½
+000B D2A8             13                     SETB    EX0     ;´ò¿ªÍâ²¿ÖÐ¶Ï0
+000D D2AF             14                     SETB    EA      ;´ò¿ª×ÜÖÐ¶Ï
+000F F590             15                     MOV             P1,A    ;½«ÀÛ¼ÓÆ÷AÖÐµÄÖµ¸³Öµ¸øP1¿Ú
+0011 1134             16                     ACALL   DELAY_1S        ;µ÷ÓÃÑÓÊ±º¯Ê
+                      17     ;**********************************
+                      18     
+                      19     ;***********Ñ­»·*****************
+0013                  20     LOOP:
+0013 200009           21                     JB              FLAG,L0
+0016 300009           22                     JNB             FLAG,L1
+0019 F590             23     I0:             MOV             P1,A    ;½«ÀÛ¼ÓÆ÷AÖÐµÄÖµ¸³Öµ¸øP1¿Ú
+001B 1134             24                     ACALL   DELAY_1S        ;µ÷ÓÃÑÓÊ±º¯Ê
+001D 0113             25                     AJMP    LOOP    ;Ñ­»·
+                      26     ;***************************************
+                      27     
+001F                  28     L0:
+001F 03               29                     RR      A
+0020 0119             30                     AJMP    I0
+0022                  31     L1:
+0022 23               32                     RL      A
+0023 0119             33                     AJMP    I0
+                      34     
+                      35     ;***************Íâ²¿ÖÐ¶Ï0º¯Ê×Ó³ÌÐò************
+0025                  36     EXT_INT0:
+0025 112A             37                     ACALL   DELAY_100MS     ;Ïû¶¶ÑÓÊ±
+0027 B200             38                     CPL             FLAG            ;¶ÔFLAG½øÐÐÈ¡·´
+0029 32               39                     RETI                            ;ÖÐ¶Ï·µ»Øº¯Ê
+                      40     ;**********************************************
+                      41     
+                      42     ;*****************ÑÓÊ±×Ó³ÌÐò***********
+002A                  43     DELAY_100MS:    ;ÑÓÊ±´óÔ¼Îª100ms×Ó³ÌÐò
+002A 79C8             44                             MOV             R1,#200
+002C 7AF8             45     D1:                     MOV             R2,#248
+002E 00               46                             NOP
+002F DAFE             47                             DJNZ    R2,$
+0031 D9F9             48                             DJNZ    R1,D1
+0033 22               49                             RET
+                      50     
+0034                  51     DELAY_1S:       ;ÑÓÊ±´óÔ¼Îª1s×Ó³ÌÐò
+0034 7B0A             52                             MOV             R3,#10  ;10*100MS
+0036 12002A           53     D2:                     LCALL   DELAY_100MS
+0039 DBFB             54                             DJNZ    R3,D2
+003B 22               55                             RET
+                      56     ;**************************************
+                      57     
+A51 MACRO ASSEMBLER  CLASS14                                                              10/24/2021 22:25:34 PAGE     2
+
+                      58     END
+                             
+                             
+A51 MACRO ASSEMBLER  CLASS14                                                              10/24/2021 22:25:34 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D1 . . . . . . . .  C ADDR   002CH   A   
+D2 . . . . . . . .  C ADDR   0036H   A   
+DELAY_100MS. . . .  C ADDR   002AH   A   
+DELAY_1S . . . . .  C ADDR   0034H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+EXT_INT0 . . . . .  C ADDR   0025H   A   
+FLAG . . . . . . .  B ADDR   0020H.0 A   
+I0 . . . . . . . .  C ADDR   0019H   A   
+IT0. . . . . . . .  B ADDR   0088H.0 A   
+L0 . . . . . . . .  C ADDR   001FH   A   
+L1 . . . . . . . .  C ADDR   0022H   A   
+LOOP . . . . . . .  C ADDR   0013H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+START. . . . . . .  C ADDR   0005H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

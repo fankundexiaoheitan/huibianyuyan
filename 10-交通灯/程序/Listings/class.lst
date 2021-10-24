@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  CLASS                                                                09/26/2021 12:12:47 PAGE     1
+A51 MACRO ASSEMBLER  CLASS                                                                10/21/2021 10:29:56 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02c
@@ -59,17 +59,17 @@ LOC  OBJ            LINE     SOURCE
 0045 22               49                             RET
                       50     
 0046                  51     DELAY_60S:      ;延时大约为60s子程序
-0046 7B3C             52                             MOV             R3,#60  ;60*1S
+0046 7B02             52                             MOV             R3,#2   ;60*1S
 0048 120038           53     D2:                     LCALL   DELAY_1S
 004B DBFB             54                             DJNZ    R3,D2
 004D 22               55                             RET
                       56     ;**************************************
                       57     
-A51 MACRO ASSEMBLER  CLASS                                                                09/26/2021 12:12:47 PAGE     2
+A51 MACRO ASSEMBLER  CLASS                                                                10/21/2021 10:29:56 PAGE     2
 
                       58     END
                              
-A51 MACRO ASSEMBLER  CLASS                                                                09/26/2021 12:12:47 PAGE     3
+A51 MACRO ASSEMBLER  CLASS                                                                10/21/2021 10:29:56 PAGE     3
 
 SYMBOL TABLE LISTING
 ------ ----- -------

@@ -1,0 +1,144 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/24/2021  22:25:34  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\XUEXIGONGJU\KEIL\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\class14.obj TO .\Objects\class14 PRINT (.\Listings
+>> \class14.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (?C_STARTUP)
+  .\Objects\class14.obj (CLASS14)
+
+
+LINK MAP OF MODULE:  .\Objects\class14 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+* OVERLAP * CODE    0000H     003CH     ABSOLUTE     
+            CODE    003CH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+UNRESOLVED EXTERNAL SYMBOLS:
+   ?C_START
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\class14 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:003CH         SEGMENT       ?C_C51STARTUP
+  I:0008H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:003FH         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:003CH         SYMBOL        STARTUP1
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/24/2021  22:25:34  PAGE 2
+
+
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:003CH         LINE#         133
+  C:003EH         LINE#         134
+  C:003FH         LINE#         135
+  C:0040H         LINE#         136
+  C:0042H         LINE#         185
+  C:0045H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        CLASS14
+  C:002CH         SYMBOL        D1
+  C:0036H         SYMBOL        D2
+  C:002AH         SYMBOL        DELAY_100MS
+  C:0034H         SYMBOL        DELAY_1S
+  B:00A8H.7       SYMBOL        EA
+  B:00A8H.0       SYMBOL        EX0
+  C:0025H         SYMBOL        EXT_INT0
+  B:0020H.0       SYMBOL        FLAG
+  C:0019H         SYMBOL        I0
+  B:0088H.0       SYMBOL        IT0
+  C:001FH         SYMBOL        L0
+  C:0022H         SYMBOL        L1
+  C:0013H         SYMBOL        LOOP
+  D:0090H         SYMBOL        P1
+  C:0005H         SYMBOL        START
+  C:0000H         LINE#         2
+  C:0003H         LINE#         4
+  C:0005H         LINE#         10
+  C:0007H         LINE#         11
+  C:0009H         LINE#         12
+  C:000BH         LINE#         13
+  C:000DH         LINE#         14
+  C:000FH         LINE#         15
+  C:0011H         LINE#         16
+  C:0013H         LINE#         21
+  C:0016H         LINE#         22
+  C:0019H         LINE#         23
+  C:001BH         LINE#         24
+  C:001DH         LINE#         25
+  C:001FH         LINE#         29
+  C:0020H         LINE#         30
+  C:0022H         LINE#         32
+  C:0023H         LINE#         33
+  C:0025H         LINE#         37
+  C:0027H         LINE#         38
+  C:0029H         LINE#         39
+  C:002AH         LINE#         44
+  C:002CH         LINE#         45
+  C:002EH         LINE#         46
+  C:002FH         LINE#         47
+  C:0031H         LINE#         48
+  C:0033H         LINE#         49
+  C:0034H         LINE#         52
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/24/2021  22:25:34  PAGE 3
+
+
+  C:0036H         LINE#         53
+  C:0039H         LINE#         54
+  C:003BH         LINE#         55
+  -------         ENDMOD        CLASS14
+
+*** WARNING L5: CODE SPACE MEMORY OVERLAP
+    FROM:    0000H
+    TO:      0002H
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  ?C_START
+    MODULE:  .\Objects\STARTUP.obj (?C_STARTUP)
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  ?C_START
+    MODULE:  .\Objects\STARTUP.obj (?C_STARTUP)
+    ADDRESS: 0046H
+
+Program Size: data=9.0 xdata=0 code=75
+LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)
