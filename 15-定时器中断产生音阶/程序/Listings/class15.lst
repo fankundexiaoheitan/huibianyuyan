@@ -1,0 +1,123 @@
+A51 MACRO ASSEMBLER  CLASS15                                                              10/31/2021 22:32:36 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\class15.obj
+ASSEMBLER INVOKED BY: C:\xuexigongju\keil\C51\BIN\A51.EXE class15.asm SET(SMALL) DEBUG PRINT(.\Listings\class15.lst) OBJ
+                      ECT(.\Objects\class15.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;°à¼¶£ºB19222
+                       2     ;ÐÕÃû£ºÕÔÑ©À¤
+                       3     ;¹¦ÄÜ½éÉÜ£º
+                       4     ;ÀûÓÃµ¥Æ¬»úµÄ¶¨Ê±Æ÷ÊµÏÖLEDÁÁ2sµÄÊ±¼ä£¬È»ºóÏ¨Ãð¡£
+                       5     ;±¾´ÎÊ¹ÓÃ¾§ÕñÎª12M
+                       6     
+0000                   7     ORG     0000H
+0000 011D              8     AJMP    START
+0003                   9     ORG             0003H
+0003 013D             10     AJMP    EXT0_INT
+000B                  11     ORG             000BH
+000B 0142             12     AJMP    TIME0_INT
+001B                  13     ORG             001BH
+001B 0153             14     AJMP    TIME1_INT
+                      15     
+                      16     ;********³õÊ¼»¯³ÌÐò*********
+001D                  17     START:
+001D 780A             18             MOV             R0,#10          ;10*50ms
+001F 7900             19             MOV             R1,#00H
+0021 7400             20             MOV             A,#00H
+0023 758911           21             MOV             TMOD,#11H       ;Ê¹ÓÃ¶¨Ê±Æ÷0ºÍ1Îª·½Ê½1  16Î»¶¨Ê±Æ÷
+                      22             
+                      23             ;¶¨Ê±Æ÷1¶¨Ê±50ms
+0026 758D3C           24             MOV             TH1,#60
+0029 758BB0           25             MOV             TL1,#176
+                      26             
+                      27             ;¶¨Ê±Æ÷0³õÖµÉèÖÃ
+002C 758CFC           28             MOV     TH0,#252                                                
+002F 758A44           29             MOV             TL0,#68
+                      30                                                     
+0032 75A88B           31             MOV             IE,#8BH         ;´ò¿ª×ÜÖÐ¶ÏºÍ¶¨Ê±Æ÷0ºÍ¶¨Ê±Æ÷1ºÍÍâ²¿ÖÐ¶Ï0µÄÖÐ¶Ï
+0035 D288             32             SETB    IT0                     ;ÉèÖÃÍâ²¿ÖÐ¶Ï0´¥·¢·½Ê½ÎªÏÂ½µÑØ
+0037 C28C             33             CLR     TR0                     ;¹Ø±Õ¶¨Ê±Æ÷0
+0039 C28E             34             CLR     TR1                     ;¹Ø±Õ¶¨Ê±Æ÷1
+003B 80FE             35             SJMP    $                       ;µÈ´ÖÐ¶ÏÏìÓ¦
+                      36     ;***************************
+                      37     
+                      38     ;*********Íâ²¿ÖÐ¶Ï0*******
+003D                  39     EXT0_INT:
+003D D28E             40             SETB    TR1     ;´ò¿ª¶¨Ê±Æ÷1
+003F D28C             41             SETB    TR0     ;´ò¿ª¶¨Ê±Æ÷0
+0041 32               42             RETI            ;ÖÐ¶Ï·µ»ØÖ¸Áî
+                      43     ;***************************
+                      44     
+                      45     ;*********¶¨Ê±Æ÷0ÖÐ¶Ï*******
+0042                  46     TIME0_INT:
+0042 900068           47             MOV             DPTR,#NEED_TH
+0045 E9               48             MOV             A,R1
+0046 93               49             MOVC    A,@A+DPTR
+0047 F58C             50             MOV     TH0,A           ;ÔÙ´Î×°ÔØÒ»´Î
+0049 90006F           51             MOV             DPTR,#NEED_TL
+004C E9               52             MOV             A,R1
+004D 93               53             MOVC    A,@A+DPTR
+004E F58A             54             MOV             TL0,A
+0050 B290             55             CPL             P1.0    ;¶ÔÒ½ÅP0.0½øÐÐÈ¡·´
+0052 32               56             RETI            ;ÖÐ¶Ï·µ»ØÖ¸Áî
+                      57     ;***************************
+A51 MACRO ASSEMBLER  CLASS15                                                              10/31/2021 22:32:36 PAGE     2
+
+                      58     
+                      59     ;*********¶¨Ê±Æ÷1ÖÐ¶Ï*******
+0053                  60     TIME1_INT:
+                      61             ;¶¨Ê±Æ÷1¶¨Ê±50ms
+0053 758D3C           62             MOV             TH1,#60
+0056 758BB0           63             MOV             TL1,#176
+0059 D80C             64             DJNZ    R0,D0
+005B 780A             65             MOV             R0,#10
+005D 09               66             INC             R1
+005E B90706           67             CJNE    R1,#7,D0
+0061 7900             68             MOV             R1,#00H
+0063 C28C             69             CLR     TR0                     ;¹Ø±Õ¶¨Ê±Æ÷0
+0065 C28E             70             CLR     TR1                     ;¹Ø±Õ¶¨Ê±Æ÷1
+0067 32               71     D0:     RETI            ;ÖÐ¶Ï·µ»ØÖ¸Áî
+                      72     ;***************************
+                      73     
+0068 FCFCFDFD         74     NEED_TH:        DB      252,252,253,253,253,253,254
+006C FDFDFE                  
+006F 44AC0934         75     NEED_TL:        DB      68,172,9,52,130,200,6
+0073 82C806                  
+                      76     
+                      77     
+                      78     END
+A51 MACRO ASSEMBLER  CLASS15                                                              10/31/2021 22:32:36 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D0 . . . . . . . .  C ADDR   0067H   A   
+EXT0_INT . . . . .  C ADDR   003DH   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+IT0. . . . . . . .  B ADDR   0088H.0 A   
+NEED_TH. . . . . .  C ADDR   0068H   A   
+NEED_TL. . . . . .  C ADDR   006FH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+START. . . . . . .  C ADDR   001DH   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TIME0_INT. . . . .  C ADDR   0042H   A   
+TIME1_INT. . . . .  C ADDR   0053H   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
